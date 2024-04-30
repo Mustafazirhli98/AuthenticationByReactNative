@@ -3,8 +3,8 @@ import { createContext, useState } from "react";
 const initialValues = {
     token: "",
     isAuthenticated: false,
-    authenticate: () => { },
-    logOut: () => { }
+    onAuthenticate: () => { },
+    onLogOut: () => { }
 }
 
 export const AuthContext = createContext(initialValues)
@@ -13,20 +13,24 @@ export const AuthContext = createContext(initialValues)
 const AuthContextProvider = ({ children }) => {
     const [authToken, setAuthToken] = useState(null)
 
-    const authenticate = (token) => {
+    const onAuthenticate = (token) => {
         setAuthToken(token)
     }
-    const logOut = () => { }
+    const onLogOut = () => {
+        setAuthToken(null)
+    }
 
     const value = {
         token: authToken,
         isAuthenticated: !!authToken,
-        authenticate: authenticate,
-        logOut: logOut
+        onAuthenticate: onAuthenticate,
+        onLogOut: onLogOut
     }
 
     return (
-        <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={value}>
+            {children}
+        </AuthContext.Provider>
     )
 }
 
