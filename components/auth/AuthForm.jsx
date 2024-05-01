@@ -1,24 +1,43 @@
 import { StyleSheet, View } from "react-native"
 import Input from "./Input"
 import Button from "../ui/Button"
+import { useState } from "react"
 
-const AuthForm = ({ isLogin, onChangeText, keyboardType }) => {
+const AuthForm = ({ isLogin, keyboardType }) => {
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+
+
+    const onChangeInput = (enteredText, type) => {
+        if (type === "email") {
+            setEmail(enteredText)
+        } if (type === "password") {
+            setPassword(enteredText)
+        } if (type === "confirmPassword") {
+            setConfirmPassword(enteredText)
+        }
+        console.log(type, enteredText)
+    }
+
+
     return (
         <View style={styles.container}>
             <View>
                 <Input
                     label="Email"
-                    onChangeText={onChangeText}
+                    onChangeText={onChangeInput.bind(this, "email")}
                     keyboardType={keyboardType}
                 />
                 <Input
                     label="Password"
-                    onChangeText={onChangeText}
+                    onChangeText={onChangeInput.bind(this, "password")}
                     keyboardType={keyboardType}
                 />
                 {!isLogin && (
                     <Input label={"Confirm your password"}
-                        onChangeText={onChangeText}
+                        onChangeText={onChangeInput.bind(this, "confirmPassword")}
                         keyboardType={keyboardType}
                     />
                 )}
