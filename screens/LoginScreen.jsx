@@ -1,17 +1,10 @@
-import { StyleSheet, Text, View } from "react-native"
+import AuthContent from "../components/auth/AuthContent"
 
 const LoginScreen = () => {
     return (
-        <View style={styles.container}>
-            <Text>Login Screen</Text>
-        </View>
+        <AuthContent isLogin />
     )
 }
 
 export default LoginScreen
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    }
-})

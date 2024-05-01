@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
 });
 
 //TODOS:
-// create files.
 // create UI and Form elements
 // create screens
 // make UI convenient

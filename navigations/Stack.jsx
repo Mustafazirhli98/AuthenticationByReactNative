@@ -10,8 +10,20 @@ const Stack = () => {
     const AuthStack = () => {
         return (
             <Stack.Navigator>
-                <Stack.Screen name="LoginScreen" component={LoginScreen} />
-                <Stack.Screen name="SignupScreen" component={SignupScreen} />
+                <Stack.Screen
+                    name="LoginScreen"
+                    component={LoginScreen}
+                    options={{
+                        title: "Log in"
+                    }}
+                />
+                <Stack.Screen
+                    name="SignupScreen"
+                    component={SignupScreen}
+                    options={{
+                        title: "Sign up"
+                    }}
+                />
             </Stack.Navigator>
         )
     }
