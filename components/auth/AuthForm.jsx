@@ -10,7 +10,7 @@ const AuthForm = ({ isLogin, keyboardType }) => {
     const [confirmPassword, setConfirmPassword] = useState("")
 
 
-    const onChangeInput = (enteredText, type) => {
+    const onChangeInput = (type, enteredText) => {
         if (type === "email") {
             setEmail(enteredText)
         } if (type === "password") {
@@ -18,9 +18,7 @@ const AuthForm = ({ isLogin, keyboardType }) => {
         } if (type === "confirmPassword") {
             setConfirmPassword(enteredText)
         }
-        console.log(type, enteredText)
     }
-
 
     return (
         <View style={styles.container}>
