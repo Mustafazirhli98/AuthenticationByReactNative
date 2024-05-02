@@ -2,10 +2,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import SignupScreen from "../screens/SignupScreen"
 import WelcomeScreen from "../screens/WelcomeScreen"
 import LoginScreen from "../screens/LoginScreen"
-import { NavigationContainer } from "@react-navigation/native"
+import { useContext } from "react"
+import { AuthContext } from "../store/AuthContext"
 
 const Stack = () => {
     const Stack = createNativeStackNavigator()
+    const context = useContext(AuthContext)
+
 
     const AuthStack = () => {
         return (
@@ -30,11 +33,16 @@ const Stack = () => {
 
     const AuthenticatedStack = () => {
         return (
-            <Stack.Navigator name="WelcomeScreen" component={<WelcomeScreen />} />
+            <Stack.Navigator >
+                <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+            </Stack.Navigator>
         )
     }
     return (
-        <AuthStack />
+        context.isAuthenticated ?
+            <AuthStack /> :
+            <AuthenticatedStack />
+
     )
 }
 

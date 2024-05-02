@@ -1,11 +1,18 @@
-import { StyleSheet, Text, View } from "react-native"
+import { Alert, StyleSheet, Text, View } from "react-native"
 import AuthForm from "./AuthForm"
 import FlatButton from "../ui/FlatButton"
 import { useNavigation } from "@react-navigation/native"
+import { useContext, useState } from "react"
+import { AuthContext } from "../../store/AuthContext"
+import { createUser } from "../../service/http"
 
 const AuthContent = ({ isLogin }) => {
-
     const navigation = useNavigation()
+    const [isCredentialsValid, setIsCredentialsValid] = useState({
+        emailValid: false,
+        passwordValid: false,
+        confirmPasswordValid: false
+    })
 
     const switchAuthContent = () => {
         if (isLogin) {
@@ -13,9 +20,31 @@ const AuthContent = ({ isLogin }) => {
         } else navigation.replace("LoginScreen")
     }
 
+    const onSubmit = async (credentials) => {
+        let { email, password, confirmPassword } = credentials;
+
+        email = email.trim()
+        password = password.trim()
+
+        const isEmailValid = email.includes("@");
+        const isPasswordValid = password.length > 6 && password.length < 15
+        const isconfirmPasswordValid = (password == confirmPassword)
+
+        if (!isEmailValid || !isPasswordValid || !isconfirmPasswordValid) {
+            Alert.alert("Uyarı!", "Kimlik bilgilerinizi istenilen biçimde girin.")
+            setIsCredentialsValid({
+                emailValid: isEmailValid,
+                passwordValid: isPasswordValid,
+                confirmPassword: isconfirmPasswordValid
+            })
+            return;
+        }
+        createUser(email, password)
+    }
+
     return (
         <View style={styles.container}>
-            <AuthForm isLogin={isLogin} />
+            <AuthForm isLogin={isLogin} onSubmit={onSubmit} />
             <FlatButton
                 onPress={switchAuthContent}
                 style={styles.flatButton}>

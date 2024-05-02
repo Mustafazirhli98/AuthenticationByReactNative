@@ -21,8 +21,11 @@ const styles = StyleSheet.create({
 });
 
 //TODOS:
-// create UI and Form elements
-// create screens
-// make UI convenient
-// create database and auth
-// give functionability
+
+// login fonksiyonunu düzenle
+// login isteğini düzenle
+// logout fonksiyonunu düzenle
+// style giydir
+//hata mesajı düzenle ve inputlara hataya göre style uygula
+// activity indicator kullan
+// Apploading kullan

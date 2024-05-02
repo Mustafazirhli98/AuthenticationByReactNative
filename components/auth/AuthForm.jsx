@@ -3,7 +3,7 @@ import Input from "./Input"
 import Button from "../ui/Button"
 import { useState } from "react"
 
-const AuthForm = ({ isLogin, keyboardType }) => {
+const AuthForm = ({ isLogin, keyboardType, onSubmit }) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -19,7 +19,13 @@ const AuthForm = ({ isLogin, keyboardType }) => {
             setConfirmPassword(enteredText)
         }
     }
-
+    const submitHandler = () => {
+        onSubmit({
+            email,
+            password,
+            confirmPassword
+        })
+    }
     return (
         <View style={styles.container}>
             <View>
@@ -41,7 +47,11 @@ const AuthForm = ({ isLogin, keyboardType }) => {
                 )}
             </View>
             <View style={styles.buttonArea}>
-                <Button style={styles.button}>{isLogin ? "Log in" : "Sign up"}</Button>
+                <Button
+                    onPress={submitHandler}
+                    style={styles.button}>
+                    {isLogin ? "Log in" : "Sign up"}
+                </Button>
             </View>
         </View>
     )
