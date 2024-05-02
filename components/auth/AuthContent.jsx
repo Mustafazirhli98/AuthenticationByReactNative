@@ -2,11 +2,9 @@ import { Alert, StyleSheet, Text, View } from "react-native"
 import AuthForm from "./AuthForm"
 import FlatButton from "../ui/FlatButton"
 import { useNavigation } from "@react-navigation/native"
-import { useContext, useState } from "react"
-import { AuthContext } from "../../store/AuthContext"
-import { createUser } from "../../service/http"
+import { useState } from "react"
 
-const AuthContent = ({ isLogin }) => {
+const AuthContent = ({ isLogin, AuthenticateHandler }) => {
     const navigation = useNavigation()
     const [isCredentialsValid, setIsCredentialsValid] = useState({
         emailValid: false,
@@ -39,7 +37,7 @@ const AuthContent = ({ isLogin }) => {
             })
             return;
         }
-        createUser(email, password)
+        AuthenticateHandler(email, password)
     }
 
     return (

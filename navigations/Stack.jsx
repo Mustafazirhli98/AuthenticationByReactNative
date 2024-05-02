@@ -9,7 +9,6 @@ const Stack = () => {
     const Stack = createNativeStackNavigator()
     const context = useContext(AuthContext)
 
-
     const AuthStack = () => {
         return (
             <Stack.Navigator>
@@ -40,8 +39,8 @@ const Stack = () => {
     }
     return (
         context.isAuthenticated ?
-            <AuthStack /> :
             <AuthenticatedStack />
+            : <AuthStack />
 
     )
 }
