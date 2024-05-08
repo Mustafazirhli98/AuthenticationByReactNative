@@ -7,11 +7,11 @@ import LoadingOverlay from "../components/ui/LoadingOverlay"
 const LoginScreen = () => {
 
     const context = useContext(AuthContext)
-    const [isLoading, setısLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const loginHandler = async (email, password) => {
         try {
-            setısLoading(true)
+            setIsLoading(true)
             const response = await logInUser(email, password)
             context.onAuthenticate(response.data.idToken)
             setIsLoading(false)

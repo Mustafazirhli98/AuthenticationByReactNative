@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from "react-native"
 import { ColorPalette } from "../constants/ColorPalette"
+import WelcomeUser from "../components/ui/svg/WelcomeUser"
 
 const WelcomeScreen = () => {
     return (
         <View style={styles.container}>
-            <Text>
-                Welcome to AUTHENTICATION APP
-            </Text>
+            <WelcomeUser />
+            <Text style={styles.title}>WELCOME</Text>
         </View>
     )
 }
@@ -18,7 +18,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: ColorPalette.primary
+        backgroundColor: ColorPalette.success
+    },
+    title: {
+        color: ColorPalette.primary,
+        marginTop: 18,
+        fontSize: 18,
     }
 })
 
