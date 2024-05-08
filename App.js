@@ -25,10 +25,9 @@ const styles = StyleSheet.create({
 
 //TODOS:
 
-// login fonksiyonunu düzenle
-// login isteğini düzenle
-// logout fonksiyonunu düzenle
 // style giydir
-//hata mesajı düzenle ve inputlara hataya göre style uygula
+// hata mesajı düzenle ve inputlara hataya göre style uygula
 // activity indicator kullan
 // Apploading kullan
+// try catch bloklarındaki hata fonksiyonlarını düzenle, hatalar ile loading screen'in verilmesini bağla.
+// AuthContent'teki hata Alert'inin kullanımına bak.

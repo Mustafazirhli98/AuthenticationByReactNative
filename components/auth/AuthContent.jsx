@@ -28,7 +28,7 @@ const AuthContent = ({ isLogin, AuthenticateHandler }) => {
         const isPasswordValid = password.length > 6 && password.length < 15
         const isconfirmPasswordValid = (password == confirmPassword)
 
-        if (!isEmailValid || !isPasswordValid || !isconfirmPasswordValid) {
+        if (!isLogin && (!isEmailValid || !isPasswordValid || !isconfirmPasswordValid)) {
             Alert.alert("Uyarı!", "Kimlik bilgilerinizi istenilen biçimde girin.")
             setIsCredentialsValid({
                 emailValid: isEmailValid,
@@ -36,6 +36,14 @@ const AuthContent = ({ isLogin, AuthenticateHandler }) => {
                 confirmPassword: isconfirmPasswordValid
             })
             return;
+        }
+        if (!isEmailValid || !isPasswordValid) {
+            Alert.alert("Uyarı!", "Hatalı Login İşlemi")
+            setIsCredentialsValid({
+                emailValid: isEmailValid,
+                passwordValid: isPasswordValid,
+                confirmPassword: isconfirmPasswordValid
+            })
         }
         AuthenticateHandler(email, password)
     }

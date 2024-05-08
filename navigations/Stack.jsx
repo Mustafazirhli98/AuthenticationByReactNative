@@ -4,6 +4,7 @@ import WelcomeScreen from "../screens/WelcomeScreen"
 import LoginScreen from "../screens/LoginScreen"
 import { useContext } from "react"
 import { AuthContext } from "../store/AuthContext"
+import { Ionicons } from "@expo/vector-icons";
 
 const Stack = () => {
     const Stack = createNativeStackNavigator()
@@ -33,7 +34,20 @@ const Stack = () => {
     const AuthenticatedStack = () => {
         return (
             <Stack.Navigator >
-                <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+                <Stack.Screen
+                    name="WelcomeScreen"
+                    component={WelcomeScreen}
+                    options={{
+                        headerRight: ({ tintColor }) => (
+                            <Ionicons
+                                name="exit-outline"
+                                size={30}
+                                color={tintColor}
+                                onPress={context.onLogOut}
+                            />
+                        ),
+                    }}
+                />
             </Stack.Navigator>
         )
     }
