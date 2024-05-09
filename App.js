@@ -22,6 +22,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-// inputların typelarını ve keyboardTypelarını düzenle
-// parola inputuna göz iconu ve type değiştirme fonksiyonu ekle
