@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useState } from "react"
 import { errorMessages } from "../../constants/ErrorMesages"
 import { showAlert } from "../../utils/Alert"
+import { ColorPalette } from "../../constants/ColorPalette"
 
 const AuthContent = ({ isLogin, AuthenticateHandler }) => {
     const navigation = useNavigation()
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
     },
     flatButton: {
         textAlign: "center",
-        marginTop: 10
+        marginTop: 10,
+        color: ColorPalette.secondary,
     }
 })

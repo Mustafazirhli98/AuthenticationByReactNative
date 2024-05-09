@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: ColorPalette.success
+        backgroundColor: ColorPalette.grey
     },
     title: {
         color: ColorPalette.primary,

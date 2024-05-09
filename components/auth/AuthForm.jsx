@@ -2,6 +2,7 @@ import { StyleSheet, View } from "react-native"
 import Input from "./Input"
 import Button from "../ui/Button"
 import { useState } from "react"
+import { ColorPalette } from "../../constants/ColorPalette"
 
 const AuthForm = ({ isLogin, keyboardType, onSubmit, isCredentialsValid }) => {
 
@@ -73,9 +74,11 @@ const styles = StyleSheet.create({
         textAlign: "center",
         borderWidth: 1,
         width: 70,
-        paddingHorizontal: 10,
-        paddingVertical: 4,
-        borderRadius: 4
+        paddingHorizontal: 8,
+        paddingVertical: 8,
+        borderRadius: 4,
+        fontSize: 14,
+        fontWeight: "bold",
     }
 })
 

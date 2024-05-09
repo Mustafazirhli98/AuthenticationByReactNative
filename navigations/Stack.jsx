@@ -8,6 +8,7 @@ import { ColorPalette } from "../constants/ColorPalette"
 import { Ionicons } from "@expo/vector-icons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import * as SplashScreen from "expo-splash-screen"
+import { Alert } from "react-native"
 
 const Stack = () => {
     const Stack = createNativeStackNavigator()
@@ -20,7 +21,9 @@ const Stack = () => {
             const fetchToken = async () => {
                 SplashScreen.preventAutoHideAsync()
                 const storedToken = await AsyncStorage.getItem("token")
-                if (storedToken) context.onAuthenticate(storedToken)
+                if (storedToken) {
+                    context.onAuthenticate(storedToken)
+                }
                 setIsFetchingToken(false)
                 SplashScreen.hideAsync()
             }
@@ -28,7 +31,11 @@ const Stack = () => {
         }, [isFetchingToken])
 
         return (
-            <Stack.Navigator >
+            <Stack.Navigator screenOptions={{
+                headerStyle: {
+                    backgroundColor: ColorPalette.blue
+                }
+            }}>
                 <Stack.Screen
                     name="LoginScreen"
                     component={LoginScreen}
@@ -56,14 +63,28 @@ const Stack = () => {
                     options={{
                         title: "Welcome",
                         headerStyle: {
-                            backgroundColor: ColorPalette.primary
+                            backgroundColor: ColorPalette.blue
                         },
                         headerRight: ({ tintColor }) => (
                             <Ionicons
                                 name="exit-outline"
                                 size={30}
                                 color={tintColor}
-                                onPress={context.onLogOut}
+                                onPress={() => {
+                                    Alert.alert("You are about to leave!", "Are you sure to log out?",
+                                        [
+                                            {
+                                                text: "no",
+                                                style: "cancel",
+                                            },
+                                            {
+                                                text: "yes",
+                                                style: "default",
+                                                onPress: context.onLogOut
+                                            }
+                                        ]
+                                    )
+                                }}
                             />
                         ),
                     }}

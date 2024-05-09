@@ -3,6 +3,8 @@ import AuthContent from "../components/auth/AuthContent"
 import { createUser } from "../service/http"
 import { AuthContext } from "../store/AuthContext"
 import LoadingOverlay from "../components/ui/LoadingOverlay"
+import { Alert } from "react-native"
+import { errorMessages } from "../constants/ErrorMesages"
 
 const SignupScreen = () => {
     const context = useContext(AuthContext)
@@ -15,7 +17,7 @@ const SignupScreen = () => {
             context.onAuthenticate(response.data.idToken)
         }
         catch {
-            console.log("authentication error")
+            Alert.alert(errorMessages.httpError.title, errorMessages.httpError.body)
         }
         setIsLoading(false)
     }
