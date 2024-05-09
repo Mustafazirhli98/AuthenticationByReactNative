@@ -3,11 +3,12 @@ import Input from "./Input"
 import Button from "../ui/Button"
 import { useState } from "react"
 
-const AuthForm = ({ isLogin, keyboardType, onSubmit }) => {
+const AuthForm = ({ isLogin, keyboardType, onSubmit, isCredentialsValid }) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+
 
 
     const onChangeInput = (type, enteredText) => {
@@ -33,16 +34,19 @@ const AuthForm = ({ isLogin, keyboardType, onSubmit }) => {
                     label="Email"
                     onChangeText={onChangeInput.bind(this, "email")}
                     keyboardType={keyboardType}
+                    isValid={isCredentialsValid.emailValid}
                 />
                 <Input
                     label="Password"
                     onChangeText={onChangeInput.bind(this, "password")}
                     keyboardType={keyboardType}
+                    isValid={isCredentialsValid.passwordValid}
                 />
                 {!isLogin && (
                     <Input label={"Confirm your password"}
                         onChangeText={onChangeInput.bind(this, "confirmPassword")}
                         keyboardType={keyboardType}
+                        isValid={isCredentialsValid.confirmPasswordValid}
                     />
                 )}
             </View>

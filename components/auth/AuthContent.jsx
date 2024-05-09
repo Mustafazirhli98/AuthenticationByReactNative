@@ -3,13 +3,16 @@ import AuthForm from "./AuthForm"
 import FlatButton from "../ui/FlatButton"
 import { useNavigation } from "@react-navigation/native"
 import { useState } from "react"
+import { errorMessages } from "../../constants/ErrorMesages"
+import { showAlert } from "../../utils/Alert"
 
 const AuthContent = ({ isLogin, AuthenticateHandler }) => {
     const navigation = useNavigation()
+    const [errorMessage, setErrorMessage] = useState("");
     const [isCredentialsValid, setIsCredentialsValid] = useState({
-        emailValid: false,
-        passwordValid: false,
-        confirmPasswordValid: false
+        emailValid: true,
+        passwordValid: true,
+        confirmPasswordValid: true
     })
 
     const switchAuthContent = () => {
@@ -18,39 +21,38 @@ const AuthContent = ({ isLogin, AuthenticateHandler }) => {
         } else navigation.replace("LoginScreen")
     }
 
-    const onSubmit = async (credentials) => {
+    const onSubmit = (credentials) => {
         let { email, password, confirmPassword } = credentials;
 
         email = email.trim()
         password = password.trim()
 
         const isEmailValid = email.includes("@");
-        const isPasswordValid = password.length > 6 && password.length < 15
-        const isconfirmPasswordValid = (password == confirmPassword)
+        const isPasswordValid = password.length > 6 && password.length < 10
+        const isConfirmPasswordValid = (password == confirmPassword) && confirmPassword != ""
 
-        if (!isLogin && (!isEmailValid || !isPasswordValid || !isconfirmPasswordValid)) {
-            Alert.alert("Uyarı!", "Kimlik bilgilerinizi istenilen biçimde girin.")
+        if (!isEmailValid ||
+            !isPasswordValid ||
+            (!isLogin && !isConfirmPasswordValid)
+        ) {
             setIsCredentialsValid({
                 emailValid: isEmailValid,
                 passwordValid: isPasswordValid,
-                confirmPassword: isconfirmPasswordValid
+                confirmPasswordValid: isConfirmPasswordValid
+            })
+            showAlert({
+                isLogin,
+                isEmailValid,
+                isPasswordValid,
+                isConfirmPasswordValid
             })
             return;
         }
-        if (!isEmailValid || !isPasswordValid) {
-            Alert.alert("Uyarı!", "Hatalı Login İşlemi")
-            setIsCredentialsValid({
-                emailValid: isEmailValid,
-                passwordValid: isPasswordValid,
-                confirmPassword: isconfirmPasswordValid
-            })
-        }
         AuthenticateHandler(email, password)
     }
-
     return (
         <View style={styles.container}>
-            <AuthForm isLogin={isLogin} onSubmit={onSubmit} />
+            <AuthForm isLogin={isLogin} onSubmit={onSubmit} isCredentialsValid={isCredentialsValid} />
             <FlatButton
                 onPress={switchAuthContent}
                 style={styles.flatButton}>

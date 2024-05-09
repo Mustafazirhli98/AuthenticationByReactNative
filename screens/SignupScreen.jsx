@@ -13,11 +13,11 @@ const SignupScreen = () => {
             setIsLoading(true)
             const response = await createUser(email, password)
             context.onAuthenticate(response.data.idToken)
-            setIsLoading(false)
         }
         catch {
             console.log("authentication error")
         }
+        setIsLoading(false)
     }
 
     if (isLoading) return <LoadingOverlay />

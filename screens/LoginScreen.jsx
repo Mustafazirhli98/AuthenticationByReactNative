@@ -3,6 +3,8 @@ import AuthContent from "../components/auth/AuthContent"
 import { AuthContext } from "../store/AuthContext"
 import { logInUser } from "../service/http"
 import LoadingOverlay from "../components/ui/LoadingOverlay"
+import { Alert } from "react-native"
+import { errorMessages } from "../constants/ErrorMesages"
 
 const LoginScreen = () => {
 
@@ -14,10 +16,10 @@ const LoginScreen = () => {
             setIsLoading(true)
             const response = await logInUser(email, password)
             context.onAuthenticate(response.data.idToken)
-            setIsLoading(false)
         } catch {
-            console.log("login error")
+            Alert.alert(errorMessages.httpError.title, errorMessages.httpError.body)
         }
+        setIsLoading(false)
     }
 
     if (isLoading) return <LoadingOverlay />
