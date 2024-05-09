@@ -4,7 +4,7 @@ import Button from "../ui/Button"
 import { useState } from "react"
 import { ColorPalette } from "../../constants/ColorPalette"
 
-const AuthForm = ({ isLogin, keyboardType, onSubmit, isCredentialsValid }) => {
+const AuthForm = ({ isLogin, onSubmit, isCredentialsValid }) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -34,20 +34,21 @@ const AuthForm = ({ isLogin, keyboardType, onSubmit, isCredentialsValid }) => {
                 <Input
                     label="Email"
                     onChangeText={onChangeInput.bind(this, "email")}
-                    keyboardType={keyboardType}
                     isValid={isCredentialsValid.emailValid}
+                    keyboardType={"email-address"}
                 />
                 <Input
                     label="Password"
                     onChangeText={onChangeInput.bind(this, "password")}
-                    keyboardType={keyboardType}
                     isValid={isCredentialsValid.passwordValid}
+                    keyboardType={"number-pad"}
+                    isLogin={isLogin}
                 />
                 {!isLogin && (
                     <Input label={"Confirm your password"}
                         onChangeText={onChangeInput.bind(this, "confirmPassword")}
-                        keyboardType={keyboardType}
                         isValid={isCredentialsValid.confirmPasswordValid}
+                        keyboardType={"number-pad"}
                     />
                 )}
             </View>

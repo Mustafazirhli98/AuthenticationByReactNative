@@ -1,17 +1,36 @@
 import { StyleSheet, Text, TextInput, View } from "react-native"
 import { ColorPalette } from "../../constants/ColorPalette"
+import Eye from "../ui/Eye"
+import { useState } from "react"
 
-const Input = ({ label, secure, keyboardType, onChangeText, isValid }) => {
+const Input = ({ label, secure, keyboardType, onChangeText, isValid, isLogin }) => {
+
+    const [isEyeOff, setIsEyeOff] = useState(true)
+    const changeSecure = () => {
+        setIsEyeOff(!isEyeOff)
+    }
+    
+    const inputStyles = [styles.input]
+    if (label === "Password") {
+        inputStyles.push({ width: '86%' })
+    } if (!isValid) {
+        inputStyles.push(styles.invalidInput)
+    }
 
     return (
         <View View style={styles.container} >
             <Text style={!isValid && styles.invalidLabel}>{label}</Text>
-            <TextInput
-                style={!isValid ? styles.invalidInput : styles.inputStyle}
-                keyboardType={keyboardType}
-                onChangeText={onChangeText}
-                secureTextEntry={secure}
-            />
+            <View style={label === "Password" && styles.inputContainer}>
+                <TextInput
+                    style={inputStyles}
+                    onChangeText={onChangeText}
+                    keyboardType={keyboardType}
+                    secureTextEntry={isEyeOff ? secure : !secure}
+                />
+                {
+                    isLogin && <Eye isEyeOff={isEyeOff} changeSecure={changeSecure} style={styles.eyeIcon} />
+                }
+            </View>
         </View>
     )
 }
@@ -22,7 +41,11 @@ const styles = StyleSheet.create({
     container: {
         marginVertical: 5
     },
-    inputStyle: {
+    inputContainer: {
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    input: {
         borderWidth: 1,
         borderRadius: 8,
         fontSize: 12,
@@ -43,5 +66,8 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
         paddingHorizontal: 8,
         fontSize: 14
+    },
+    eyeIcon: {
+        marginHorizontal: 5
     }
 })

@@ -3,7 +3,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import Stack from './navigations/Stack';
 import AuthContextProvider from './store/AuthContext';
-import { ColorPalette } from './constants/ColorPalette';
 
 export default function App() {
   return (
@@ -23,3 +22,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+// inputların typelarını ve keyboardTypelarını düzenle
+// parola inputuna göz iconu ve type değiştirme fonksiyonu ekle
