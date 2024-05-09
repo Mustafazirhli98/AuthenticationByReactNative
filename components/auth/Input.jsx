@@ -9,9 +9,9 @@ const Input = ({ label, secure, keyboardType, onChangeText, isValid, isLogin }) 
     const changeSecure = () => {
         setIsEyeOff(!isEyeOff)
     }
-    
+
     const inputStyles = [styles.input]
-    if (label === "Password") {
+    if (label === "Password" && isLogin) {
         inputStyles.push({ width: '86%' })
     } if (!isValid) {
         inputStyles.push(styles.invalidInput)
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     input: {
+        width: "100%",
         borderWidth: 1,
         borderRadius: 8,
         fontSize: 12,

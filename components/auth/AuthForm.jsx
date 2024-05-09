@@ -43,6 +43,7 @@ const AuthForm = ({ isLogin, onSubmit, isCredentialsValid }) => {
                     isValid={isCredentialsValid.passwordValid}
                     keyboardType={"number-pad"}
                     isLogin={isLogin}
+                    secure={true}
                 />
                 {!isLogin && (
                     <Input label={"Confirm your password"}
