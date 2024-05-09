@@ -2,16 +2,31 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import SignupScreen from "../screens/SignupScreen"
 import WelcomeScreen from "../screens/WelcomeScreen"
 import LoginScreen from "../screens/LoginScreen"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../store/AuthContext"
 import { ColorPalette } from "../constants/ColorPalette"
 import { Ionicons } from "@expo/vector-icons"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import * as SplashScreen from "expo-splash-screen"
 
 const Stack = () => {
     const Stack = createNativeStackNavigator()
     const context = useContext(AuthContext)
 
     const AuthStack = () => {
+        const [isFetchingToken, setIsFetchingToken] = useState(true)
+
+        useEffect(() => {
+            const fetchToken = async () => {
+                SplashScreen.preventAutoHideAsync()
+                const storedToken = await AsyncStorage.getItem("token")
+                if (storedToken) context.onAuthenticate(storedToken)
+                setIsFetchingToken(false)
+                SplashScreen.hideAsync()
+            }
+            fetchToken()
+        }, [isFetchingToken])
+
         return (
             <Stack.Navigator >
                 <Stack.Screen

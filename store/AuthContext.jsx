@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useState } from "react";
 
 const initialValues = {
@@ -15,9 +16,11 @@ const AuthContextProvider = ({ children }) => {
 
     const onAuthenticate = (token) => {
         setAuthToken(token)
+        AsyncStorage.setItem("token", token)
     }
     const onLogOut = () => {
         setAuthToken(null)
+        AsyncStorage.removeItem("token")
     }
 
     const value = {

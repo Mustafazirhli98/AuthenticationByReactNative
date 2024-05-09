@@ -24,8 +24,6 @@ const styles = StyleSheet.create({
 });
 
 //TODOS:
-// hata mesajı düzenle ve inputlara hataya göre style uygula
-// try catch bloklarındaki hata fonksiyonlarını düzenle, hatalar ile loading screen'in verilmesini bağla.
-// AuthContent'teki hata Alert'inin kullanımına bak.
 // Async storage kullan.
 // Apploading kullan
+// style düzenle
