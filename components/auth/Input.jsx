@@ -25,7 +25,7 @@ const Input = ({ label, secure, keyboardType, onChangeText, isValid, isLogin }) 
                     style={inputStyles}
                     onChangeText={onChangeText}
                     keyboardType={keyboardType}
-                    secureTextEntry={(isEyeOff && isLogin) ? secure : !secure}
+                    secureTextEntry={(isEyeOff && isLogin && secure) ? secure : !secure}
                 />
                 {
                     isLogin && <Eye isEyeOff={isEyeOff} changeSecure={changeSecure} style={styles.eyeIcon} />
