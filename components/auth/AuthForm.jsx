@@ -50,6 +50,7 @@ const AuthForm = ({ isLogin, onSubmit, isCredentialsValid }) => {
                         onChangeText={onChangeInput.bind(this, "confirmPassword")}
                         isValid={isCredentialsValid.confirmPasswordValid}
                         keyboardType={"number-pad"}
+                        secure={false}
                     />
                 )}
             </View>
